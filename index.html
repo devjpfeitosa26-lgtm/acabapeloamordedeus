@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTickets - Encontre seus Próximos Eventos</title>
+    <!-- Tailwind CSS CDN para estilização rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="bg-indigo-700 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-wider">Uni<span class="text-indigo-300">Tickets</span></a>
+            
+            <div class="space-x-4">
+                <a href="/login" class="hover:text-indigo-200 transition">Entrar</a>
+                <a href="/cadastro" class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition">Criar Conta</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (Busca & Destaque) -->
+    <section class="bg-gradient-to-r from-indigo-700 to-purple-800 text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+            <h1 class="text-4xl md:text-5xl font-extrabold">Viva experiências inesquecíveis.</h1>
+            <p class="text-indigo-100 text-lg">Encontre shows, congressos acadêmicos, festas e workshops em um só lugar.</p>
+            
+            <!-- Formulário de Busca -->
+            <form action="/eventos/buscar" method="GET" class="bg-white rounded-lg p-2 shadow-lg flex flex-col md:flex-row gap-2 max-w-3xl mx-auto">
+                <input type="text" name="busca" placeholder="Buscar por nome do evento ou artista..." class="flex-grow p-3 text-gray-700 rounded-md focus:outline-none">
+                <select name="categoria" class="p-3 text-gray-600 bg-gray-100 rounded-md focus:outline-none">
+                    <option value="">Todas Categorias</option>
+                    <option value="ACADEMICO">Acadêmico</option>
+                    <option value="SHOWS">Shows</option>
+                    <option value="FESTAS">Festas</option>
+                </select>
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-md transition">
+                    Buscar
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Próximos Eventos</h2>
+
+        <!-- GRID DE EVENTOS (Iterado pelo Spring Boot via Thymeleaf) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Card de Exemplo Dinâmico (Thymeleaf) -->
+            <!-- O 'th:each' faz o loop na lista 'eventos' enviada pelo Java -->
+            <div th:each="evento : ${eventos}" class="bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100 overflow-hidden flex flex-col">
+                
+                <img th:src="${evento.urlImagem}" src="https://via.placeholder.com/400x200" alt="Imagem do Evento" class="w-full h-48 object-cover">
+                
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <div>
+                        <span th:text="${evento.categoria}" class="text-xs font-semibold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-1 rounded">
+                            Acadêmico
+                        </span>
+                        
+                        <h3 th:text="${evento.titulo}" class="text-xl font-bold text-gray-900 mt-2">
+                            Simpósio de Tecnologia 2026
+                        </h3>
+                        
+                        <p class="text-gray-500 text-sm mt-1 flex items-center gap-1">
+                            📍 <span th:text="${evento.local}">Auditório Central</span>
+                        </p>
+                        
+                        <p class="text-gray-500 text-sm flex items-center gap-1">
+                            📅 <span th:text="${#temporals.format(evento.dataHora, 'dd/MM/yyyy HH:mm')}">20/09/2026 às 19:00</span>
+                        </p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <div>
+                            <span class="text-xs text-gray-400 block">A partir de</span>
+                            <span th:text="${'R$ ' + #numbers.formatDecimal(evento.precoInicial, 1, 'POINT', 2, 'COMMA')}" class="text-lg font-bold text-gray-900">
+                                R$ 25,00
+                            </span>
+                        </div>
+                        
+                        <a th:href="@{/eventos/{id}(id=${evento.id})}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg text-sm transition">
+                            Garantir Vaga
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <p>&copy; 2026 UniTickets. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
