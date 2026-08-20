@@ -12,8 +12,8 @@ Abaixo está o mapeamento dos componentes da aplicação com base na estrutura d
 - [x] **`Email.java`** (Value Object): Validação de estrutura do e-mail (presença do caractere `@` e tratamento de campos nulos/vazios).
 - [x] **`Senha.java`** / **`CadastroSenha.java`** (Value Object): Validação de critérios de segurança da senha (mínimo de 12 caracteres, uso de regra com Regex, verificação de letras maiúsculas e números).
 - [x] **`Usuario.java`** (Entidade): Agrupamento das regras de e-mail e senha utilizando composição de objetos de domínio.
-- [/] **`Cadastro.java`**: Fluxo de criação de novos usuários com tratamento de exceções para regras de negócio inválidas.
-- [/] **`Login.java`**: Fluxo de autenticação, recebendo credenciais e validando contra o usuário cadastrado.
+- [x] **`Cadastro.java`**: Fluxo de criação de novos usuários com tratamento de exceções para regras de negócio inválidas.
+- [x] **`Login.java`**: Fluxo de autenticação, recebendo credenciais e validando contra o usuário cadastrado.
 
 ---
 
