@@ -1,7 +1,7 @@
 
 // Cadastro e autenticação por e-mail e senha, sem recuperação de senha nesta versão.
 
-public class CadastroSenha {
+public class Senha {
 
     private final String valor;
 
