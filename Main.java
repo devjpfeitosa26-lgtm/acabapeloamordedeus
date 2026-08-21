@@ -20,13 +20,13 @@ public class Main {
             Usuario usuario = new Usuario(email, senha);
 
             // 2. Se as validações passarem, abre a Home direto
-            System.out.println("✅ Sucesso! Entrando...");
+            System.out.println("Sucesso! Entrando...");
             Home home = new Home(usuario);
             home.exibirMenu();
 
         } catch (IllegalArgumentException e) {
             // Se o e-mail ou a senha forem inválidos, a exceção cai aqui
-            System.out.println("❌ Erro ao entrar: " + e.getMessage());
+            System.out.println("Erro ao entrar: " + e.getMessage());
         }
     }
 }
