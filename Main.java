@@ -21,8 +21,8 @@ public class Main {
 
             // 2. Se as validações passarem, abre a Home direto
             System.out.println("Sucesso! Entrando...");
-            Home home = new Home(usuario);
-            home.exibirMenu();
+           // Home home = new Home(usuario);
+           // home.exibirMenu();
 
         } catch (IllegalArgumentException e) {
             // Se o e-mail ou a senha forem inválidos, a exceção cai aqui
