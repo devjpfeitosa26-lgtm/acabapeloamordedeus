@@ -19,9 +19,9 @@ public class Evento{
             throw new IllegalArgumentException("O título do evento não pode ser vazio.");
         }
 
-        if(dataHoraEvento == null){
+        /*if(dataHoraEvento == null){
             throw new IllegalArgumentException("A data e o horario são obrigatorios.");
-        }
+        } */
 
         if(capacidadeDeInscritos <= 0){
             throw new IllegalArgumentException("A capacidade do evento deve ser maior que zero.");

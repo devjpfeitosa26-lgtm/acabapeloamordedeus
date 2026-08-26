@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +9,7 @@ public class Main {
         System.out.println("=== ENTAR NO SISTEMA ===");
         
         try {
+            
             System.out.print("E-mail: ");
             String emailInput = scanner.nextLine();
 
@@ -21,6 +23,23 @@ public class Main {
 
             // 2. Se as validações passarem, abre a Home direto
             System.out.println("Sucesso! Entrando...");
+
+            System.out.println("Digite o local do evento:");
+            String localEvento = scanner.nextLine();
+
+            System.out.println("Digite o titulo do evento:");
+            String tituloEvento = scanner.nextLine();
+
+            System.out.println("Digite a capacidade maxima de pessoas nesse evento:");
+            int limitePessoas = scanner.nextInt();
+
+            //System.out.println("Digite a data e hora do evento:");
+            //LocalDateTime dataHoraEvento = scanner.nextLocalDateTime();
+
+            Evento evento = new Evento(localEvento, tituloEvento, limitePessoas, null);
+            Inscricao inscricao = new Inscricao(usuario, evento);
+
+            System.out.println(inscricao.getEvento());
            // Home home = new Home(usuario);
            // home.exibirMenu();
 
