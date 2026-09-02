@@ -1,9 +1,9 @@
-public class Inscricao{
+public class InscricaoEvento{
     private final Usuario usuario;
     private final Evento evento;
 
     // construtor
-    public Inscricao(Usuario usuario, Evento evento){
+    public InscricaoEvento(Usuario usuario, Evento evento){
         if(usuario == null){
             throw new IllegalArgumentException("O usuario não pode ser nulo.");
         }
