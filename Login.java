@@ -1,15 +1,32 @@
-public class Login {
+public final class Login {
+    private final RepositorioUsuarios repositorio;
 
-    public boolean autenticar(String emailDigitado, String senhaDigitada, Usuario usuarioDoBanco) {
-        // Verifica se o e-mail e a senha informados batem com o cadastrado
-        boolean emailValido = usuarioDoBanco.getEmail().getValor().equals(emailDigitado);
-        boolean senhaValida = usuarioDoBanco.getSenha().getValor().equals(senhaDigitada);
+    public Login(RepositorioUsuarios repositorio) {
+        this.repositorio = java.util.Objects.requireNonNull(repositorio);
+    }
 
-        if (emailValido && senhaValida) {
-            System.out.println("Login realizado com sucesso!");
-            return true;
+    public Sessao autenticar(String email, String senha) {
+        Usuario usuario;
+        try {
+            usuario = repositorio.buscarPorEmail(email);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("E-mail ou senha incorretos.");
         }
+        if (usuario == null || !usuario.getSenha().confere(senha)) {
+            throw new IllegalArgumentException("E-mail ou senha incorretos.");
+        }
+        return new Sessao(usuario);
+    }
 
-        throw new IllegalArgumentException("E-mail ou senha incorretos.");
+    /** Só Login cria uma sessão, depois de conferir as credenciais. */
+    public static final class Sessao {
+        private final Usuario usuario;
+        private boolean ativa = true;
+        private Sessao(Usuario usuario) { this.usuario = usuario; }
+        public Usuario getUsuario() {
+            if (!ativa) throw new IllegalStateException("Sessão encerrada. Entre novamente.");
+            return usuario;
+        }
+        public void encerrar() { ativa = false; }
     }
 }
